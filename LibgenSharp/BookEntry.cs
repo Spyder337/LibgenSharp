@@ -27,7 +27,7 @@ public struct BookEntry
     
     public override string ToString()
     {
-        var sb = new StringBuilder();
+        var sb = new StringBuilder(7);
         sb.AppendLine($"Title: {Title}");
         sb.AppendLine($"Authors: {Authors}");
         sb.AppendLine($"Extension: {Extension}");

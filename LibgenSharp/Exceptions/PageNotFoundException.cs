@@ -1,4 +1,4 @@
-﻿namespace LibgenSharp;
+﻿namespace LibgenSharp.Exceptions;
 
 public class PageNotFoundException : Exception
 {

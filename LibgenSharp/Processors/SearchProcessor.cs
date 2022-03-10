@@ -1,5 +1,6 @@
 ﻿using System.Web;
 using HtmlAgilityPack;
+using LibgenSharp.Exceptions;
 
 namespace LibgenSharp.Processors;
 
@@ -9,10 +10,10 @@ public class SearchProcessor : Processor<BookEntry[]>
     
     public SearchProcessor() : base()
     {
-        _Xpath = @"/html/body/table[3]";
+        _linkXpath = @"/html/body/table[3]";
     }
     
-    public SearchProcessor(string xpath) : base(xpath)
+    public SearchProcessor(string linkXpath) : base(linkXpath)
     {
     }
 
@@ -37,7 +38,7 @@ public class SearchProcessor : Processor<BookEntry[]>
     {
         
         var url = args[0];
-        var doc = _webClient!.Load(url);
+        var doc = _htmlWeb!.Load(url);
         var res = new List<BookEntry>();
         
         if (doc == null)
@@ -45,7 +46,7 @@ public class SearchProcessor : Processor<BookEntry[]>
             throw new PageNotFoundException();
         }
         
-        var tableNode = doc.DocumentNode.SelectNodes(_Xpath).First();
+        var tableNode = doc.DocumentNode.SelectNodes(_linkXpath).First();
         var rows = tableNode.SelectNodes("tr");
         rows.Remove(0);
 

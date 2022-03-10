@@ -6,6 +6,8 @@ namespace LibgenSharp;
 
 public class LibgenController
 {
+    public static readonly string RootPath =
+        Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "LibgenSharp");
     private static readonly string _isbnRegex = @"(\b978(?:-?\d){10}\b)|(\b978(?:-?\d){9}(?:-?X|x))|(\b(?:-?\d){10})\b|(\b(?:-?\d){9}(?:-?X|x)\b)";
     
     public void PrintSearch(string isbn)
@@ -69,6 +71,6 @@ public class LibgenController
 
     private string BuildPath(string bookTitle, string ext)
     {
-        return Path.Combine(Program.RootPath, "Downloads", $"{bookTitle}.{ext}");
+        return Path.Combine(RootPath, "Downloads", $"{bookTitle}.{ext}");
     }
 }

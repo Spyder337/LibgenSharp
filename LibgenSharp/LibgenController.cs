@@ -51,11 +51,11 @@ public class LibgenController
         foreach (Match match in matches)
         {
             var isbn = match.Value;
-            if (TryDownloading(isbn))
-            {
-                count++;
-                Thread.Sleep(2000);
-            }
+            if (!TryDownloading(isbn)) 
+                continue;
+            
+            count++;
+            Thread.Sleep(2000);
         }
         return count;
     }

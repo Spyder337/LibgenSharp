@@ -4,11 +4,20 @@
         <TargetFramework>net6.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <PackageVersion>1.0.2</PackageVersion>
+        <Title>LibgenSharp</Title>
+        <Authors>Spyder337</Authors>
+        <Description>A library for automating Libgen downloads and searches.</Description>
+        <Copyright>MIT</Copyright>
+        <PackageProjectUrl>https://github.com/Spyder337/LibgenSharp</PackageProjectUrl>
+        <PackageLicenseUrl>https://github.com/Spyder337/LibgenSharp/blob/main/LICENSE</PackageLicenseUrl>
+        <RepositoryUrl>https://github.com/Spyder337/LibgenSharp</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
     </PropertyGroup>
 
     <ItemGroup>
       <PackageReference Include="HtmlAgilityPack" Version="1.11.42" />
-      <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     </ItemGroup>
 
 </Project>

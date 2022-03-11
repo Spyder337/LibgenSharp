@@ -9,6 +9,19 @@ public class LibgenController
     public static readonly string RootPath =
         Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "LibgenSharp");
     private static readonly string _isbnRegex = @"(\b978(?:-?\d){10}\b)|(\b978(?:-?\d){9}(?:-?X|x))|(\b(?:-?\d){10})\b|(\b(?:-?\d){9}(?:-?X|x)\b)";
+
+    public LibgenController()
+    {
+        if (!Directory.Exists(RootPath))
+        {
+            Directory.CreateDirectory(RootPath);
+        }
+
+        if (!Directory.Exists(Path.Combine(RootPath, "Downloads")))
+        {
+            Directory.CreateDirectory(Path.Combine(RootPath, "Downloads"));
+        }
+    }
     
     public void PrintSearch(string isbn)
     {

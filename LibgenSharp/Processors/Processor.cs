@@ -44,7 +44,7 @@ public abstract class Processor<T>
 
     protected HtmlDocument GetDoc(string url)
     {
-        if (_webClient != null)
+        if (_htmlWeb != null)
         {
             var doc = _htmlWeb.Load(url);
             Thread.Sleep(1000);

@@ -1,6 +1,5 @@
 ﻿using System.Text.RegularExpressions;
 using LibgenSharp.Processors;
-using Microsoft.VisualBasic.FileIO;
 
 namespace LibgenSharp;
 
@@ -9,6 +8,7 @@ public class LibgenController
     public static readonly string RootPath =
         Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "LibgenSharp");
     private static readonly string _isbnRegex = @"(\b978(?:-?\d){10}\b)|(\b978(?:-?\d){9}(?:-?X|x))|(\b(?:-?\d){10})\b|(\b(?:-?\d){9}(?:-?X|x)\b)";
+    public DownloadProcessor Processor = new DownloadCurlProcessor();
 
     public LibgenController()
     {
@@ -47,11 +47,11 @@ public class LibgenController
         }
 
         var url = entry.Urls[0];
-        DlProcessor dlProcessor = new LibgenLolProcessor();
+        DownloadProcessor downloadProcessor = new WebClientProcessors.LibgenLolWebClientProcessor();
         var path = BuildPath(entry.Title, entry.Extension);
         var fs = File.Create(path);
         fs.Dispose();
-        dlProcessor.Process(out bool result, url, path);
+        downloadProcessor.Process(out bool result, url, path);
         return result;
     }
 
@@ -103,7 +103,7 @@ public class LibgenController
 
     private string BuildPath(string bookTitle, string ext)
     { 
-        bookTitle = bookTitle.Replace(":", ""); 
+        bookTitle = bookTitle.Replace(":", "");
         var path = Path.Combine(RootPath, "Downloads", $"{bookTitle}.{ext}");
         path = Path.GetFullPath(path);
         return path;

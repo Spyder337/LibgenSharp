@@ -12,7 +12,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\LibgenSharpLib\LibgenSharpLib.csproj" />
+      <ProjectReference Include="..\LibgenBaseLib\LibgenBaseLib.csproj" />
     </ItemGroup>
 
 </Project>

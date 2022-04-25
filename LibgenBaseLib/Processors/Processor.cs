@@ -3,7 +3,7 @@ using HtmlAgilityPack;
 
 namespace LibgenSharp.Processors;
 
-public abstract class Processor<T>
+public abstract class Processor<T> : IProcessor<T>
 {
     protected static HttpClient? _client = null;
     protected static HtmlWeb? _htmlWeb = null;

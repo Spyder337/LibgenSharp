@@ -83,7 +83,10 @@ public class LibgenController
     }
 
     private string BuildPath(string bookTitle, string ext)
-    {
-        return Path.Combine(RootPath, "Downloads", $"{bookTitle}.{ext}");
+    { 
+        bookTitle = bookTitle.Replace(":", ""); 
+        var path = Path.Combine(RootPath, "Downloads", $"{bookTitle}.{ext}");
+        path = Path.GetFullPath(path);
+        return path;
     }
 }

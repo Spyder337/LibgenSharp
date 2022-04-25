@@ -35,14 +35,19 @@ public abstract class DlProcessor : Processor<bool>
         var link = GetLink(doc, _linkXpath);
         Console.WriteLine(link);
         result = TryDownloading(link, path);
+        Console.WriteLine($"{result}");
     }
 
     protected virtual bool TryDownloading(string url, string path)
     {
         var uri = new Uri(url, UriKind.Absolute);
+        Console.WriteLine(uri);
         try
         {
-            _webClient!.DownloadFile(uri, path);
+            var data = _webClient!.DownloadData(uri);
+            using var fs = File.Create(path);
+            fs.Write(data);
+            fs.Flush();
             return true;
         }
         catch(WebException e)

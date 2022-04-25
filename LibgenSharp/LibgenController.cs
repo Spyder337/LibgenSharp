@@ -70,11 +70,30 @@ public class LibgenController
                 continue;
             
             count++;
-            Thread.Sleep(2000);
+            Thread.Sleep(3000);
         }
         return count;
     }
-    
+
+    public Dictionary<string, BookEntry[]> SearchUsingFile(string path)
+    {
+        Dictionary<string, BookEntry[]> res = new();
+        if (!File.Exists(path))
+            return res;
+        using var sr = File.OpenText(path);
+        var text = sr.ReadToEnd();
+        var isbns = text.Split('\n');
+        foreach (var isbn in isbns)
+        {
+            var entries = Search(isbn);
+            if (entries.Length != 0)
+            {
+                res.Add(isbn, entries);
+            }
+        }
+        return res;
+    }
+
     protected BookEntry[] Search(string isbn)
     {
         var proc = new SearchProcessor();

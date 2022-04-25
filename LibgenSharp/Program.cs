@@ -32,7 +32,8 @@ else if (args[0] == "-df")
     }
     else
     {
-        controller.TryDownloadingFromFile(args[1]);
+        int successes = controller.TryDownloadingFromFile(args[1]);
+        Console.WriteLine($"Successful Downloads: {successes}");
     }
 }
 else if (args[0] == "-s")

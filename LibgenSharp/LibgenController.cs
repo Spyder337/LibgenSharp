@@ -9,7 +9,7 @@ namespace LibgenSharp;
 
 public class LibgenController
 {
-    public static readonly HashSet<char> InvalidFileSystemChars;
+    public static readonly HashSet<char> InvalidFileSystemChars = new();
     public static readonly string RootPath =
         Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "LibgenSharp");
     public static string DownloadsPath = Path.Combine(RootPath, "Downloads");

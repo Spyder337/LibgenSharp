@@ -1,4 +1,4 @@
-﻿namespace LibgenSharp.Exceptions;
+﻿namespace LibgenBaseLib.Exceptions;
 
 public class LinkNotFoundException : Exception
 {

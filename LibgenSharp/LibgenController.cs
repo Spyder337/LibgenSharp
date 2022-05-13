@@ -1,9 +1,9 @@
 ﻿using System.Text;
 using System.Text.Json.Nodes;
 using System.Text.RegularExpressions;
-using LibgenSharp.Processors;
-using System.Text.Json.Serialization;
 using JsonSerializer = System.Text.Json.JsonSerializer;
+using LibgenBaseLib.Web;
+using LibgenBaseLib;
 
 namespace LibgenSharp;
 
@@ -15,7 +15,6 @@ public class LibgenController
     public static string DownloadsPath = Path.Combine(RootPath, "Downloads");
     public static string ResultsPath = Path.Combine(RootPath, "Results");
     private static readonly string _isbnRegex = @"(\b978(?:-?\d){10}\b)|(\b978(?:-?\d){9}(?:-?X|x))|(\b(?:-?\d){10})\b|(\b(?:-?\d){9}(?:-?X|x)\b)";
-    public DownloadProcessor Processor = new DownloadCurlProcessor();
 
     public LibgenController()
     {
@@ -82,11 +81,11 @@ public class LibgenController
         }
 
         var url = entry.Urls[0];
-        DownloadProcessor downloadProcessor = new WebClientProcessors.LibgenLolWebClientProcessor();
         var path = BuildPath(entry.Title, entry.Extension);
         var fs = File.Create(path);
         fs.Dispose();
-        downloadProcessor.Process(out bool result, url, path);
+        var dl = new WebClientLol();
+        var result = LibgenHandler.Download(url, path, dl).Result;
         return result;
     }
 
@@ -137,8 +136,7 @@ public class LibgenController
     
     protected BookEntry[] Search(string isbn, bool logToFile = false)
     {
-        var proc = new SearchProcessor();
-        proc.Process(out var entries, isbn);
+        var entries = LibgenHandler.SearchBookByIsbn(isbn).Result;
         if (logToFile)
         {
             SerializeSearch(isbn, entries);

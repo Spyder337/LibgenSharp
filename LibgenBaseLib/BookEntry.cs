@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace LibgenSharp;
+namespace LibgenBaseLib;
 
 public struct BookEntry
 {
@@ -16,7 +16,7 @@ public struct BookEntry
         Extension = "";
         Urls = new string[3];
     }
-    
+
     public BookEntry(string title, string authors, string ext, string[] urls)
     {
         Title = title;
@@ -24,7 +24,7 @@ public struct BookEntry
         Extension = ext;
         Urls = urls;
     }
-    
+
     public override string ToString()
     {
         var sb = new StringBuilder(7);
